@@ -18,57 +18,40 @@ class Board:
     def __init__(self):
         self.columns = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']
         self.rows = ['1', '2', '3', '4', '5', '6', '7', '8']
+
         for i in range(1, 9):
             index = str(i)
-            for j in range (0, 8):
-                if i < 3:
-                    if i == 2:
-                        self.board[self.columns[j]+index] = Pawn(self.columns[j], index, "white")
-                    else:
-                        if self.columns[j] == 'a':
-                            self.board[self.columns[j]+index] = Rook(self.columns[j], index, "white")
-                        elif self.columns[j] == 'b':
-                            self.board[self.columns[j]+index] = Knight(self.columns[j], index, "white")
-                        elif self.columns[j] == 'c':
-                            self.board[self.columns[j]+index] = Bishop(self.columns[j], index, "white")
-                        elif self.columns[j] == 'd':
-                            self.board[self.columns[j]+index] = King(self.columns[j], index, "white")
-                            self.whiteKing = King(self.columns[j], index, "white")
-                        elif self.columns[j] == 'e':
-                            self.board[self.columns[j]+index] = Queen(self.columns[j], index, "white")
-                        elif self.columns[j] == 'f':
-                            self.board[self.columns[j]+index] = Bishop(self.columns[j], index, "white")
-                        elif self.columns[j] == 'g':
-                            self.board[self.columns[j]+index] = Knight(self.columns[j], index, "white")
-                        elif self.columns[j] == 'h':
-                            self.board[self.columns[j]+index] = Rook(self.columns[j], index, "white")
-                        else:
-                            self.board[self.columns[j]+index] = Pawn(self.columns[j], index, "white")
-                elif i > 6:
-                    if i == 7:
-                        self.board[self.columns[j]+index] = Pawn(self.columns[j], index, "black")
-                    else:
-                        if self.columns[j] == 'a':
-                            self.board[self.columns[j]+index] = Rook(self.columns[j], index, "black")
-                        elif self.columns[j] == 'b':
-                            self.board[self.columns[j]+index] = Knight(self.columns[j], index, "black")
-                        elif self.columns[j] == 'c':
-                            self.board[self.columns[j]+index] = Bishop(self.columns[j], index, "black")
-                        elif self.columns[j] == 'd':
-                            self.board[self.columns[j]+index] = King(self.columns[j], index, "black")
-                            self.blackKing = King(self.columns[j], index, "black")
-                        elif self.columns[j] == 'e':
-                            self.board[self.columns[j]+index] = Queen(self.columns[j], index, "black")
-                        elif self.columns[j] == 'f':
-                            self.board[self.columns[j]+index] = Bishop(self.columns[j], index, "black")
-                        elif self.columns[j] == 'g':
-                            self.board[self.columns[j]+index] = Knight(self.columns[j], index, "black")
-                        elif self.columns[j] == 'h':
-                            self.board[self.columns[j]+index] = Rook(self.columns[j], index, "black")
-                        else:
-                            self.board[self.columns[j]+index] = Pawn(self.columns[j], index, "black")
-                else:
-                    self.board[self.columns[j]+index] = Piece(self.columns[j], index, "blank", "  ")
+            for j in range (0, 8):        
+            	if i == 2 :
+            	    self.board[self.columns[j]+index] = Pawn(self.columns[j], index, "white")
+            	elif i == 7:
+            	    self.board[self.columns[j]+index] = Pawn(self.columns[j], index, "black")
+            	elif i > 2 and i < 7:
+            	    self.board[self.columns[j]+index] = Piece(self.columns[j], index, "blank", "  ")
+
+        #Initialize white pieces
+        self.board['a1'] = Rook('a', '1', "white")
+        self.board['b1'] = Knight('b', '1', "white")
+        self.board['c1'] = Bishop('c', '1', "white")
+        self.board['d1'] = King('d', '1', "white")
+        self.board['e1'] = Queen('e', '1', "white")
+        self.board['f1'] = Bishop('f', '1', "white")
+        self.board['g1'] = Knight('g', '1', "white")
+        self.board['h1'] = Rook('h', '1', "white")
+
+        #Initialize black pieces
+        self.board['a8'] = Rook('a', '8', "black")
+        self.board['b8'] = Knight('b', '8', "black")
+        self.board['c8'] = Bishop('c', '8', "black")
+        self.board['d8'] = King('d', '8', "black")
+        self.board['e8'] = Queen('e', '8', "black")
+        self.board['f8'] = Bishop('f', '8', "black")
+        self.board['g8'] = Knight('g', '8', "black")
+        self.board['h8'] = Rook('h', '8', "black")					
+
+        #Initialize backup kings for check calculations
+        self.whiteKing = King('d', '1', "white")
+        self.blackKing = King('d', '8', "black")
 
 
     def printBoard(self):
